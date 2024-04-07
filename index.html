@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Sound Player</title>
+  </head>
+  <body>
+    <button onclick="playRandomSound()">Play Random Sound</button>
+
+    <!-- Audio elements -->
+    <audio id="light" src="sounds/light.mp3"></audio>
+    <audio id="off" src="sounds/off.mp3"></audio>
+    <audio id="roblox" src="sounds/roblox.mp3"></audio>
+    <audio id="saul" src="sounds/saul.mp3"></audio>
+    <audio id="skeleton" src="sounds/skeleton.mp3"></audio>
+    <audio id="sound" src="sounds/sound.mp3"></audio>
+
+    <!-- Image elements -->
+    <img id="popupImage" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:300px; height:300px;">
+
+    <script>
+      // Create an array of sound objects
+      var sounds = [
+        { id: 'light', src: 'sounds/light.mp3' },
+        { id: 'off', src: 'sounds/off.mp3' },
+        { id: 'roblox', src: 'sounds/roblox.mp3' },
+        { id: 'saul', src: 'sounds/saul.mp3' },
+        { id: 'skeleton', src: 'sounds/skeleton.mp3' },
+        { id: 'sound', src: 'sounds/sound.mp3' },
+      ];
+
+      // Create an array of image objects
+      var images = [
+        { id: 'popupImage', src: 'images/Screenshot 2024-03-30 170129.png' },
+      ];
+
+      // Function to play a random sound
+      function playRandomSound() {
+        var randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+        var audioElement = document.getElementById(randomSound.id);
+        audioElement.play();
+
+        // Select a random image
+        var randomImage = images[Math.floor(Math.random() * images.length)];
+
+        // Display the image in a pop-up window
+        var imageElement = document.getElementById(randomImage.id);
+        imageElement.style.display = 'block';
+        imageElement.src = randomImage.src;
+      }
+
+      // Add an event listener to the audio element
+      var audioElement = document.querySelector('audio');
+      audioElement.addEventListener('play', function() {
+        // Hide the image after 3 seconds
+        setTimeout(function() {
+          var imageElement = document.getElementById('popupImage');
+          imageElement.style.display = 'none';
+        }, 3000);
+      });
+    </script>
+  </body>
+</html>
